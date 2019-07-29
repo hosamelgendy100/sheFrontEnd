@@ -1,3 +1,6 @@
+import { HttpErrorHandler } from './services/http-error-handler.service';
+import { ErrorInterceptor } from './services/error.interceptor';
+import { CrudService } from './services/crud.service';
 import { UsersListComponent } from './dashboard/pages/usersList/usersList.component';
 import { CategoriesComponent } from './dashboard/pages/categories/categories.component';
 import { NavbarComponent } from './dashboard/navbar/navbar.component';
@@ -10,7 +13,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeNavbarComponent } from './homeNavbar/homeNavbar.component';
-import { CollapseModule, BsDropdownModule, CarouselModule } from 'ngx-bootstrap';
+import { CollapseModule, BsDropdownModule, CarouselModule, ModalModule } from 'ngx-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
@@ -35,6 +38,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NotificationsComponent } from './dashboard/pages/notifications/notifications.component';
 import { SubcategoriesComponent } from './dashboard/pages/subcategories/subcategories.component';
 import { DashboardProductsComponent } from './dashboard/pages/dashboardProducts/dashboardProducts.component';
+import { MessageService } from './services/message.service';
+import { CategoryEditResolver } from './_resolvers/categoryEdit.resolver';
 
 
 
@@ -53,9 +58,11 @@ import { DashboardProductsComponent } from './dashboard/pages/dashboardProducts/
     AppRoutingModule,
     CollapseModule.forRoot(), BsDropdownModule.forRoot(),
     FormsModule, HttpClientModule, ReactiveFormsModule,
-    BrowserAnimationsModule, ToastrModule.forRoot(), CarouselModule.forRoot(), NgbModule
+    BrowserAnimationsModule, ToastrModule.forRoot(), CarouselModule.forRoot(), NgbModule,
+    ModalModule.forRoot()
   ],
-  providers: [AlertifyService],
+  providers: [AlertifyService, CrudService, ErrorInterceptor,
+              HttpErrorHandler, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

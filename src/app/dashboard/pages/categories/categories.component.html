@@ -1,3 +1,51 @@
-<p>
-  categories works!
-</p>
+<div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-primary" (click)="openModal(template)">
+        <i class="fa fa-plus-circle mr-2"></i>Add Category
+      </button>
+
+      <div class="card" style="max-width: 400px;">
+        <div class="card-header">
+          <h4 class="card-title">Categories</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover table-sm">
+              <thead class="text-primary" >
+                <th *ngFor="let header of tableData.headerRow">{{header}}</th>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let category of categoriesList;let index=index">
+                  <td> {{index+1}} </td>
+                  <td> 
+                    <a (click)="edit(category)">
+                    <span *ngIf="category !== editCategory">{{category.name}}</span>
+                    <input *ngIf="category === editCategory" [(ngModel)]= "category.name"
+                      (blur)="update()"  >
+                    </a>
+                  </td>
+                  <td (click)='delete(category.id)' class="text-danger"><i class="fa fa-trash-o"></i></td>
+                </tr>
+              </tbody>
+
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  
+<!-- Create New Category -->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Create category</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <input id="categoryName" class="form-control" #categoryName placeholder="Enter category name" tabindex="1">
+    <input (click)="addCategory(categoryName.value)" type="button" value="Add" class="btn btn-sm btn-outline-primary " tabindex="2">
+  </div>
+</ng-template>

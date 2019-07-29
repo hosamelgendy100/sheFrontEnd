@@ -2492,3 +2492,8 @@ ol {
 .login_form_inner > h3 {
 	padding: 30px;
 }
+
+
+.fa{
+	cursor: pointer;
+}

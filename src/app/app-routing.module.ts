@@ -1,3 +1,4 @@
+import { CategoryEditResolver } from './_resolvers/CategoryEdit.resolver';
 import { CategoriesComponent } from './dashboard/pages/categories/categories.component';
 import { UsersListComponent } from './dashboard/pages/usersList/usersList.component';
 import { DashboardProductsComponent } from './dashboard/pages/dashboardProducts/dashboardProducts.component';
@@ -34,6 +35,7 @@ export const PUBLIC_ROUTES: Routes = [
 ];
 
 export const SECURE_ROUTES: Routes = [
+  
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardHomeComponent},
   {path: 'notifications', component: NotificationsComponent},
@@ -46,7 +48,8 @@ export const SECURE_ROUTES: Routes = [
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '', component: HomeLayoutComponent, data: { title: 'Public Views' }, children: PUBLIC_ROUTES },
-  { path: '', component: DashboardLayoutComponent,  data: { title: 'Secure Views' }, children: SECURE_ROUTES }
+  { path: '', component: DashboardLayoutComponent,  data: { title: 'Secure Views' }, children: SECURE_ROUTES,
+   runGuardsAndResolvers: 'always' }
 
 ];
 
