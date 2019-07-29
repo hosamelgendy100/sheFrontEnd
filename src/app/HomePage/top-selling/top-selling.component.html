@@ -1,0 +1,32 @@
+<section class="product-filter-section">
+		<div class="container">
+			<div class="section-title">
+				<h2>BROWSE TOP SELLING PRODUCTS</h2>
+			</div>
+			<ul class="product-filter-menu" style="text-align: center;">
+				<li><a href="#">Hijabs</a></li>
+				<li><a href="#">Dresses</a></li>
+				<li><a href="#">Bags</a></li>
+			</ul>
+			<div class="row" >
+				<div class="col-md-3" *ngFor="let image of slides">
+					<div class="product-item">
+						<div class="pi-pic">
+                            <a href="#"><img [src]="image"></a>
+							<div class="pi-links">
+								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+							</div>
+						</div>
+						<div class="pi-text">
+							<h6>$35,00</h6>
+							<p>Flamboyant Pink Top </p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="text-center pt-5">
+				<button class="site-btn sb-line sb-dark">LOAD MORE</button>
+			</div>
+		</div>
+	</section>

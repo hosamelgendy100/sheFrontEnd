@@ -24,9 +24,21 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "src/assets/scss/paper-dashboard.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/alertifyjs/build/alertify.min.js",
+              "src/assets/js/jquery-3.2.1.min.js",
+              "src/assets/js/jquery-ui.min.js",
+              "src/assets/js/jquery.slicknav.min.js",
+              "src/assets/js/jquery.nicescroll.min.js",
+              "src/assets/js/jquery.zoom.min.js",
+              "src/assets/js/bootstrap.min.js",
+              "src/assets/js/main.js"
+            ]
           },
           "configurations": {
             "production": {

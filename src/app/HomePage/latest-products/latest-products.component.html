@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="section-title">
+        <h2>LATEST PRODUCTS</h2>
+    </div>
+    <br>
+</div>
+
+<div class="container">
+	<div class="row" >
+		<div class="col-md-3" *ngFor="let image of images">
+			<div class="product-item" *ngIf="image != null">
+				<div class="pi-pic">
+					<a href="#"><img [src]="image"></a>
+					<div class="pi-links">
+						<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+						<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+					</div>
+				</div>
+				<div class="pi-text">
+					<h6>$35,00</h6>
+					<p>Flamboyant Pink Top </p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <p>
+        <button class="btn btn-info btn-sm mr-4" (click)="backward()"> << </button>
+        <button class="btn btn-info btn-sm" (click)="forward()"> >> </button>
+    </p>
+</div>
+
+
+
+<br>

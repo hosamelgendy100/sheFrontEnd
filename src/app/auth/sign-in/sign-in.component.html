@@ -1,0 +1,33 @@
+
+
+<!--================Login Box Area =================-->
+<section class="login_box_area section-margin">
+    <div class="container">
+        <div class="col-lg-6 login-form-container">
+            <div class="login_form_inner">
+                <h3>Log in to enter</h3>
+                <form class="row login_form" action="#/" id="contactForm" >
+                    <div class="col-md-12 form-group">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <div class="creat_account">
+                            <input type="checkbox" id="f-option2" name="selector">
+                            <label for="f-option2">Keep me logged in</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <button type="submit" value="submit" class="btn btn-lg btn-block"
+                        style="background: #f51167;color: white;font-weight: bold;">Log In</button>
+                        <a [routerLink]="['/forgotPassword']">Forgot Password?</a>
+                        <a [routerLink]="['/createAccount']">Creat Account?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Login Box Area =================-->
