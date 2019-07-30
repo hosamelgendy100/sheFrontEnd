@@ -3,8 +3,9 @@
       <button class="btn btn-primary" (click)="openModal(template)">
         <i class="fa fa-plus-circle mr-2"></i>Add Category
       </button>
+      <br>
 
-      <div class="card" style="max-width: 400px;">
+      <div class="card" style="min-width:500px; display: inline-block;">
         <div class="card-header">
           <h4 class="card-title">Categories</h4>
         </div>
@@ -15,13 +16,13 @@
               </thead>
 
               <tbody>
-                <tr *ngFor="let category of categoriesList;let index=index">
+                <tr *ngFor="let category of modelsList;let index=index">
                   <td> {{index+1}} </td>
                   <td> 
                     <a (click)="edit(category)">
-                    <span *ngIf="category !== editCategory">{{category.name}}</span>
-                    <input *ngIf="category === editCategory" [(ngModel)]= "category.name"
-                      (blur)="update()"  >
+                    <span *ngIf="category !== editmodel">{{category.name}}</span>
+                    <input *ngIf="category === editmodel" [(ngModel)]= "category.name"
+                      (blur)="update()">
                     </a>
                   </td>
                   <td (click)='delete(category.id)' class="text-danger"><i class="fa fa-trash-o"></i></td>
@@ -45,7 +46,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <input id="categoryName" class="form-control" #categoryName placeholder="Enter category name" tabindex="1">
-    <input (click)="addCategory(categoryName.value)" type="button" value="Add" class="btn btn-sm btn-outline-primary " tabindex="2">
+    <input id="modelName" class="form-control" #modelName placeholder="Enter category name" tabindex="1">
+    <input (click)="addModel(modelName.value)" type="button" value="Add" class="btn btn-sm btn-outline-primary " tabindex="2">
   </div>
 </ng-template>

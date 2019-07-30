@@ -1,7 +1,7 @@
 import { ToastrService } from 'ngx-toastr';
-import { Category } from './../../../models/Category';
-import { CrudService } from '../../../services/crud.service';
-import { TableData } from './../../../models/TableData';
+import { Category } from '../../models/Category';
+import { CrudService } from '../../services/crud.service';
+import { TableData } from '../../models/TableData';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
@@ -13,30 +13,31 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 export class CategoriesComponent implements OnInit {
   public tableData: TableData;
   modalRef: BsModalRef;
-  categoriesList: any;
-  editCategory: Category;
+  modelsList: any;
+  editmodel: Category;
   config = { animated: true };
   apiController = 'categories/';
 
-  constructor(private modalService: BsModalService, private categoryService: CrudService,
+  constructor(private modalService: BsModalService, private crudService: CrudService,
               private toast: ToastrService) {}
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, this.config);
-    document.getElementById('categoryName').focus();
+    document.getElementById('modelName').focus();
   }
 
   ngOnInit() {
     this.getall();
+    this.cancelUpdateMode();
   }
 
-  addCategory(name: string): void {
+  addModel(name): void {
     if (name === null || name === '') {
-         document.getElementById('categoryName').style.border = '1px solid red'; return; }
+         document.getElementById('modelName').style.border = '1px solid red'; return; }
 
-    const newCategory: Category = { name } as Category;
-    this.categoryService.add(newCategory, this.apiController).subscribe(() => {
-      this.toast.success('category added');
+    const newModel: Category = { name } as Category;
+    this.crudService.add(newModel, this.apiController).subscribe(() => {
+      this.toast.success('model added');
       this.modalRef.hide();
       this.getall();
     }, error => { this.toast.error(error); });
@@ -45,26 +46,36 @@ export class CategoriesComponent implements OnInit {
 
   getall(): void {
     this.tableData = { headerRow: [ 'No.', 'Name', 'Delete'] };
-    this.categoryService.getAll(this.apiController).subscribe( result => this.categoriesList = result);
+    this.crudService.getAll(this.apiController).subscribe( result => this.modelsList = result);
   }
 
 
-  edit(category: Category) {
-    this.editCategory = category ;
+  edit(model) {
+    this.editmodel = model ;
   }
 
 
   update() {
-    if (this.editCategory) {
-        this.categoryService.update(this.editCategory.id, this.editCategory, this.apiController).subscribe(); }
-    this.editCategory = undefined;
+    if (this.editmodel) {
+        if (this.editmodel.name === '') { return false; } else {
+        this.crudService.update(this.editmodel.id, this.editmodel, this.apiController).subscribe(); }
+        this.getall();
+      }
+    this.editmodel = undefined;
   }
 
 
-  delete(id: number) {
+  delete(id) {
     if (confirm('Are you sure?')) {
-        this.categoryService.delete(id, this.apiController).subscribe();
+        this.crudService.delete(id, this.apiController).subscribe();
         this.getall();
     }
+  }
+
+
+  cancelUpdateMode() {
+    document.onkeydown = (evt) => {
+      if (evt.key === '27' || evt.key === 'Escape' || evt.key === 'Esc') { 
+        this.editmodel = null;  }};
   }
 }

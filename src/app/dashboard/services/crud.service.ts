@@ -1,4 +1,4 @@
-import { HandleError, HttpErrorHandler } from './http-error-handler.service';
+import { HandleError, HttpErrorHandler } from '../../sharedServices/http-error-handler.service';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';

@@ -1,4 +1,4 @@
-import { TableData } from './../../../models/TableData';
+import { TableData } from '../../models/TableData';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

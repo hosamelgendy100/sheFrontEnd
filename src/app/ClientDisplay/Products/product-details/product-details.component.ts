@@ -1,4 +1,4 @@
-import { AlertifyService } from './../../services/alertify.service';
+import { AlertifyService } from '../../../sharedServices/alertify.service';
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 

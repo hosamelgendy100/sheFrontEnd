@@ -1,22 +1,21 @@
-import { CategoryEditResolver } from './_resolvers/CategoryEdit.resolver';
 import { CategoriesComponent } from './dashboard/pages/categories/categories.component';
 import { UsersListComponent } from './dashboard/pages/usersList/usersList.component';
 import { DashboardProductsComponent } from './dashboard/pages/dashboardProducts/dashboardProducts.component';
-import { ForgotPasswordComponent } from './auth/forgotPassword/forgotPassword.component';
-import { HomeLayoutComponent } from './HomePage/HomeLayout/HomeLayout.component';
+import { ForgotPasswordComponent } from './ClientDisplay/AuthPages/forgotPassword/forgotPassword.component';
+import { HomeLayoutComponent } from './ClientDisplay/DisplayLayout/HomeLayout.component';
 import { AppComponent } from './app.component';
-import { DashboardLayoutComponent } from './dashboard/dashboard-layout/dashboard-layout.component';
+import { DashboardLayoutComponent } from './dashboard/sharedPages/dashboard-layout/dashboard-layout.component';
 import { DashboardHomeComponent } from './dashboard/pages/dashboard-home/dashboard-home.component';
-import { ContactUsComponent } from './contact-us/contact-us.component';
-import { CheckOutComponent } from './cart/check-out/check-out.component';
-import { ViewCartComponent } from './cart/view-cart/view-cart.component';
-import { CreateAccountComponent } from './auth/create-account/create-account.component';
-import { SignInComponent } from './auth/sign-in/sign-in.component';
-import { HotDealsComponent } from './HomePage/hot-deals/hot-deals.component';
+import { ContactUsComponent } from './ClientDisplay/pages/contact-us/contact-us.component';
+import { CheckOutComponent } from './ClientDisplay/pages/check-out/check-out.component';
+import { ViewCartComponent } from './ClientDisplay/pages/view-cart/view-cart.component';
+import { CreateAccountComponent } from './ClientDisplay/AuthPages/create-account/create-account.component';
+import { SignInComponent } from './ClientDisplay/AuthPages/sign-in/sign-in.component';
+import { HotDealsComponent } from './ClientDisplay/pages/HomePage/hot-deals/hot-deals.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProductDetailsComponent } from './products/product-details/product-details.component';
-import { ViewProductsComponent } from './products/view-products/view-products.component';
+import { ProductDetailsComponent } from './ClientDisplay/Products/product-details/product-details.component';
+import { ViewProductsComponent } from './ClientDisplay/Products/view-products/view-products.component';
 import { NotificationsComponent } from './dashboard/pages/notifications/notifications.component';
 import { SubcategoriesComponent } from './dashboard/pages/subcategories/subcategories.component';
 
@@ -35,7 +34,6 @@ export const PUBLIC_ROUTES: Routes = [
 ];
 
 export const SECURE_ROUTES: Routes = [
-  
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardHomeComponent},
   {path: 'notifications', component: NotificationsComponent},
