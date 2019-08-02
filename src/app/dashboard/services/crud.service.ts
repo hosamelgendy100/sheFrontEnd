@@ -21,9 +21,10 @@ export class CrudService {
     this.handleError = httpErrorHandler.createHandleError('CrudService');
   }
 
+
   add(model: any, apiController: string): Observable<any> {
-    return this.http.post<any>(this.API + apiController , model, httpOptions).pipe
-            (catchError(this.handleError('add', model)));
+    return this.http.post<any>(this.API + apiController , model, httpOptions)
+             .pipe(catchError(this.handleError('add', model)));
   }
 
   getAll(apiController: string): Observable<any[]> {
@@ -32,15 +33,23 @@ export class CrudService {
             catchError(this.handleError('getAll', [])));
   }
 
-  update(id: number, model: any, apiController: string): Observable<any> {
-    return this.http.put<any>(this.API + apiController + id, model, httpOptions).pipe(
-      catchError(this.handleError('update', model))
-    );
+
+  getById(apiController: string, id): Observable<any> {
+    return this.http.get<any>(this.API + apiController + id, httpOptions)
+          .pipe(map(res => this.modelList = res),
+           catchError(this.handleError('getById')));
   }
 
+
+  update(id: number, model: any, apiController: string): Observable<any> {
+    return this.http.put<any>(this.API + apiController + id, model, httpOptions)
+        .pipe(catchError(this.handleError('update', model)));
+  }
+
+
   delete(id: number, apiController: string): Observable<{}> {
-    return this.http.delete(this.API + apiController + id, httpOptions).pipe(
-            catchError(this.handleError('delete')));
+    return this.http.delete(this.API + apiController + id, httpOptions)
+            .pipe(catchError(this.handleError('delete')));
   }
 
 }

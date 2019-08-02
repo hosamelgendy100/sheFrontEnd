@@ -1,0 +1,48 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0 10px 0;
+  }
+  .example-container > * {
+    width: 100%;
+  }
+  .example-container form {
+    margin-bottom: 20px;
+  }
+  .example-container form > * {
+    margin: 5px 0;
+  }
+  .example-container .mat-radio-button {
+    margin: 0 22px;
+  }
+  
+  .mat-form-field{
+    margin-right: 40px;
+  }
+
+
+
+
+  /* Check sizes */
+  .example-h2 {
+    margin-top: 30px;
+    font-weight: 500;
+  }
+  
+  .example-section {
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .example-margin {
+    margin: 0 10px;
+  }
+  
+  .top-margin{
+    margin-top: 20px;
+  }
+
+  .error-span{
+    color:red;
+  }

@@ -1,7 +1,8 @@
-export class User {
-    uid?: string;
-    email?: string;
-    userName?: string;
-    password?: string;
-    status?: string;
+export interface User {
+    id?: number;
+    name: string;
+    gender: string;
+    dateOfBirth: string;
+    created: string;
+    lastActive: string;
 }

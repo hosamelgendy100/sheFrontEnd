@@ -1,11 +1,8 @@
-import { AlertifyService } from '../../../sharedServices/alertify.service';
 import { ToastrService } from 'ngx-toastr';
-import { Subcategory } from '../../models/Subcategory';
 import { CrudService } from '../../services/crud.service';
-import { Category } from '../../models/Category';
-import { TableData } from '../../models/TableData';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { Subcategory } from '../../models/Subcategory';
 
 @Component({
   selector: 'app-subcategories',
@@ -14,7 +11,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 })
 
 export class SubcategoriesComponent implements OnInit {
-  public tableData: TableData;
+  public tableTitles = ['No.', 'Subcategory name', 'Category name', 'Delete'];
   modalRef: BsModalRef;
   modelsList: any;
   editmodel: Subcategory;
@@ -23,7 +20,7 @@ export class SubcategoriesComponent implements OnInit {
   categoriesList: any;
 
   constructor(private modalService: BsModalService, private crudService: CrudService,
-              private alert: AlertifyService) {}
+              private toast: ToastrService) {}
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, this.config);
@@ -38,7 +35,7 @@ export class SubcategoriesComponent implements OnInit {
   }
 
 
-  dataValidation(name?, categoryId?): boolean {
+  dataValidation(name, categoryId): boolean {
     if (name === null || name === '' || categoryId === null || categoryId === '') {
         document.getElementById('modelName').style.border = '1px solid red';
         document.getElementById('modelCategoryId').style.border = '1px solid red';
@@ -48,7 +45,7 @@ export class SubcategoriesComponent implements OnInit {
 
 
   addModel(name, categoryId): void {
-    if (!this.dataValidation(name, categoryId)) {
+    if (this.dataValidation(name, categoryId)) {
       const newModel: Subcategory = { name, categoryId } as Subcategory;
       this.crudService.add(newModel, this.apiController).subscribe(() => {
         this.toast.success('model added');
@@ -60,7 +57,6 @@ export class SubcategoriesComponent implements OnInit {
 
 
   getall(): void {
-    this.tableData = { headerRow: [ 'No.', 'Subcategory name', 'Category name', 'Delete'] };
     this.crudService.getAll(this.apiController).subscribe( result => this.modelsList = result);
   }
 

@@ -1,6 +1,9 @@
+import { AddProductPhotosComponent } from './dashboard/pages/mangaeProducts/addProductPhotos/addProductPhotos.component';
+import { DshProductDetailsComponent } from './dashboard/pages/mangaeProducts/dshProductDetails/dshProductDetails.component';
+import { AddProductComponent } from './dashboard/pages/mangaeProducts/addProduct/addProduct.component';
 import { CategoriesComponent } from './dashboard/pages/categories/categories.component';
 import { UsersListComponent } from './dashboard/pages/usersList/usersList.component';
-import { DashboardProductsComponent } from './dashboard/pages/dashboardProducts/dashboardProducts.component';
+import { DashboardProductsComponent } from './dashboard/pages/mangaeProducts/dshProducts/dashboardProducts.component';
 import { ForgotPasswordComponent } from './ClientDisplay/AuthPages/forgotPassword/forgotPassword.component';
 import { HomeLayoutComponent } from './ClientDisplay/DisplayLayout/HomeLayout.component';
 import { AppComponent } from './app.component';
@@ -41,6 +44,9 @@ export const SECURE_ROUTES: Routes = [
   {path: 'users', component: UsersListComponent},
   {path: 'categories', component: CategoriesComponent},
   {path: 'subCategories', component: SubcategoriesComponent},
+  {path: 'addProduct', component: AddProductComponent},
+  {path: 'dshProductDetails/:id', component: DshProductDetailsComponent},
+  {path: 'addProductPhotos', component: AddProductPhotosComponent},
 ];
 
 const routes: Routes = [

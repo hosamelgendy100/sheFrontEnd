@@ -1,3 +1,6 @@
+import { AddProductPhotosComponent } from './dashboard/pages/mangaeProducts/addProductPhotos/addProductPhotos.component';
+import { DshProductDetailsComponent } from './dashboard/pages/mangaeProducts/dshProductDetails/dshProductDetails.component';
+import { AddProductComponent } from './dashboard/pages/mangaeProducts/addProduct/addProduct.component';
 import { HttpErrorHandler } from './sharedServices/http-error-handler.service';
 import { ErrorInterceptor } from './sharedServices/error.interceptor';
 import { CrudService } from './dashboard/services/crud.service';
@@ -37,8 +40,17 @@ import { ProductReviewComponent } from './ClientDisplay/Products/product-review/
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NotificationsComponent } from './dashboard/pages/notifications/notifications.component';
 import { SubcategoriesComponent } from './dashboard/pages/subcategories/subcategories.component';
-import { DashboardProductsComponent } from './dashboard/pages/dashboardProducts/dashboardProducts.component';
+import { DashboardProductsComponent } from './dashboard/pages/mangaeProducts/dshProducts/dashboardProducts.component';
 import { MessageService } from './sharedServices/message.service';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import { MAT_LABEL_GLOBAL_OPTIONS } from '@angular/material/core';
 
 
 
@@ -50,7 +62,8 @@ import { MessageService } from './sharedServices/message.service';
     SignInComponent, CreateAccountComponent, DashboardHomeComponent,
     DashboardLayoutComponent, SidebarComponent, HomeLayoutComponent,
     ProductReviewComponent, ForgotPasswordComponent, NavbarComponent, NotificationsComponent,
-    CategoriesComponent, SubcategoriesComponent, DashboardProductsComponent, UsersListComponent
+    CategoriesComponent, SubcategoriesComponent, DashboardProductsComponent, UsersListComponent,
+    AddProductComponent, DshProductDetailsComponent, AddProductPhotosComponent
   ],
   imports: [
     BrowserModule,
@@ -58,10 +71,13 @@ import { MessageService } from './sharedServices/message.service';
     CollapseModule.forRoot(), BsDropdownModule.forRoot(),
     FormsModule, HttpClientModule, ReactiveFormsModule,
     BrowserAnimationsModule, ToastrModule.forRoot(), CarouselModule.forRoot(), NgbModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(), MatFormFieldModule, MatRadioModule, MatCheckboxModule, MatSelectModule,
+    MatIconModule, MatInputModule, MatButtonModule, MatCardModule
   ],
   providers: [AlertifyService, CrudService, ErrorInterceptor,
-              HttpErrorHandler, MessageService],
+              HttpErrorHandler, MessageService,
+              {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'false'}}
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

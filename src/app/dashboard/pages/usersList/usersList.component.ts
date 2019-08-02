@@ -1,5 +1,9 @@
-import { TableData } from '../../models/TableData';
 import { Component, OnInit } from '@angular/core';
+
+export interface TableData {
+  headerRow: string[];
+  dataRows: string [][];
+}
 
 @Component({
   selector: 'app-usersList',

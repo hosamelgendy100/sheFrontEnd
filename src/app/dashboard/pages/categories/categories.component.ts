@@ -1,7 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
 import { Category } from '../../models/Category';
 import { CrudService } from '../../services/crud.service';
-import { TableData } from '../../models/TableData';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
@@ -11,7 +10,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  public tableData: TableData;
+  public tableRows = [ 'No.', 'Name', 'Delete'];
   modalRef: BsModalRef;
   modelsList: any;
   editmodel: Category;
@@ -45,7 +44,6 @@ export class CategoriesComponent implements OnInit {
 
 
   getall(): void {
-    this.tableData = { headerRow: [ 'No.', 'Name', 'Delete'] };
     this.crudService.getAll(this.apiController).subscribe( result => this.modelsList = result);
   }
 

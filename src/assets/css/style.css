@@ -2484,9 +2484,9 @@ ol {
 
 .login-form-container{
 	display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 40%;
 }
 
 .login_form_inner > h3 {

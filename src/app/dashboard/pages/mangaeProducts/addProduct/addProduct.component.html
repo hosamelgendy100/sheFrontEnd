@@ -1,0 +1,121 @@
+
+<!-- Page Preloder -->
+<!-- <div id="preloder">
+  <div class="loader"></div>
+</div> -->
+
+
+<mat-card style="min-width:750px; max-width:1200px; display: inline-block;">
+  <mat-card-header>
+    <mat-card-title>Add Product</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content style="padding: 5px 20px;">
+    <form [formGroup]="productForm">
+      <div class="example-container">
+        <mat-form-field >
+          <input formControlName="name" matInput type="text" required>
+          <mat-label><mat-icon>input</mat-icon> <i> Product name</i></mat-label>
+          <mat-error *ngIf="productForm.get('name').touched && productForm.get('name').hasError('required')">
+            {{getErrorMessage('Name')}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field>
+          <input formControlName="count" matInput type="number" required>
+          <mat-label><mat-icon>unfold_less</mat-icon> <i> Count</i></mat-label>
+          <mat-error *ngIf="productForm.get('count').touched && productForm.get('count').hasError('required')">
+            {{getErrorMessage('Count')}}
+          </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input formControlName="price" matInput type="number" required>
+        <mat-label><mat-icon>attach_money</mat-icon> <i> Price</i></mat-label>
+        <mat-error *ngIf="productForm.get('price').touched && productForm.get('price').hasError('required')">
+          {{getErrorMessage('Price')}}
+        </mat-error>
+      </mat-form-field>
+      
+      <div class="example-container">
+        <label>On Sale: </label>
+        <mat-radio-group formControlName="onSale">
+          <mat-radio-button value="True">Yes</mat-radio-button>
+          <mat-radio-button value="False" checked>No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="example-container">
+        <mat-form-field class="example-full-width">
+          <textarea matInput formControlName="description" placeholder="Product description" required></textarea>
+          <mat-error *ngIf="productForm.get('description').touched && productForm.get('description').hasError('required')">
+            {{getErrorMessage('description')}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Dropdown lists -->
+      <mat-form-field>
+        <mat-label>Choose category</mat-label>
+        <mat-select formControlName="categoryId" (selectionChange)= "getSubcategories($event.value)" required>
+          <mat-option *ngFor="let category of ctgsListDd" value="{{category.id}}">{{category.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="productForm.get('categoryId').touched && productForm.get('categoryId').hasError('required')">
+          {{getErrorMessage('category')}}
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Choose subcategory</mat-label>
+        <mat-select formControlName="subCategoryId" required>
+          <mat-option *ngFor="let subcategory of subCtgsListDd" value="{{subcategory.id}}">{{subcategory.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="productForm.get('subCategoryId').touched && productForm.get('subCategoryId').hasError('required')">
+          {{getErrorMessage('subcategory')}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Choose seller</mat-label>
+        <mat-select formControlName="sellerId" required>
+          <mat-option *ngFor="let seller of sellersListDd" value="{{seller.id}}">{{seller.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="productForm.get('sellerId').touched && productForm.get('sellerId').hasError('required')">
+          {{getErrorMessage('seller')}}
+        </mat-error>
+      </mat-form-field>
+        
+  
+
+  </form>
+
+  <!-- Size lists -->
+  <p class="top-margin">Choose product available sizes: </p>
+  <section class="example-section" >
+    <mat-checkbox *ngFor="let size of ProductSizesDd" class="example-margin" 
+                  [(ngModel)]="size.checked" value="{{size.id}}" >
+                  {{size.name}}
+    </mat-checkbox>
+    <p [hidden]="checkBoxsValidation" class='error-span'>You should select at least one size </p>
+  </section>
+
+  <p>Choose product available colors: </p>
+  <section class="example-section" >
+    <mat-checkbox *ngFor="let color of ProductColorstDd" class="example-margin" 
+                  [(ngModel)]="color.checked" value="{{color.id}}" >
+                  {{color.name}}
+    </mat-checkbox>
+    <p [hidden]="checkBoxsValidation" class='error-span'>You should select at least one color </p>
+  </section>
+
+
+
+</mat-card-content>
+  <mat-card-actions>
+      <button mat-flat-button color="accent" (click)='addModel()'>Add Product</button>
+  </mat-card-actions>
+</mat-card>
+
+
