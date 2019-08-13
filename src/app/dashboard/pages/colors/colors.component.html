@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-primary" (click)="openModal(template)">
+        <i class="fa fa-plus-circle mr-2"></i>Add Color
+      </button>
+      <br>
+
+      <div class="card" style="min-width:500px; display: inline-block;">
+        <div class="card-header">
+          <h4 class="card-title">Available Colors</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover table-sm">
+              <thead class="text-primary" >
+                <th *ngFor="let header of tableRows">{{header}}</th>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let model of modelsList;let index=index">
+                  <td> {{index+1}} </td>
+                  <td> 
+                    <a (click)="edit(model)">
+                    <span *ngIf="model !== editmodel">{{model.name}}</span>
+                    <input *ngIf="model === editmodel" [(ngModel)]= "model.name"
+                      (blur)="update()" (keydown)="enterPressed()">
+                    </a>
+                  </td>
+                  <td (click)='delete(model.id)' class="text-danger"><i class="fa fa-trash-o"></i></td>
+                </tr>
+              </tbody>
+
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  
+<!-- Create New Category -->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Create Color</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <input id="modelName" class="form-control" #modelName placeholder="Enter color" tabindex="1">
+    <input (click)="addModel(modelName.value)" type="button" value="Add" class="btn btn-sm btn-outline-primary " tabindex="2">
+  </div>
+</ng-template>

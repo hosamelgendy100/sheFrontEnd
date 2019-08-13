@@ -1,3 +1,118 @@
-<p>
-  dshProductDetails works!
-</p>
+
+ 
+<!-- product section -->
+<div class="container product-container">
+    <a class="btn btn-primary" [routerLink]= "['/addProduct']">
+      <i class="fa fa-plus-circle mr-2"></i>Add another Product
+    </a>
+    <br><br>
+    
+    <div class="row">
+      <div class="col-md-5">
+          <carousel [noPause]="false" [interval]=0>
+              <slide *ngFor="let image of product.productPhotos">
+                <img src="{{imagesApi + image.url}}" style="display: block; width: 100%;">
+              </slide>
+          </carousel>        
+      </div>
+      
+
+
+      <div class="col-md-7 product-details">
+        <h4 class="product-title">{{product.name}}</h4>
+        <h4>QR {{product.price}}</h4>
+
+        <div class='row product-dt1'>
+          <div class="col-md-5 product-dtl-div">
+            <div>Category : </div>
+            <span>{{product.categoryName}} > {{product.subCategoryName}} </span>
+          </div>
+          <div class="col-md-5 product-dtl-div">
+            <div>Available : </div>
+            <span>{{product.count}} In Stock </span>
+          </div>
+          <div class="col-md-5 product-dtl-div">
+            <div>Color : </div>
+            <span>{{product.color}} </span>
+          </div>
+          <div class="col-md-5 product-dtl-div">
+            <div>Creation date : </div>
+            <span>{{product.creationDate  | date: 'dd/MM/yyyy'}} </span>
+          </div>
+          <div class="col-md-5 product-dtl-div">
+            <div>Last update : </div>
+            <span>{{product.lastEdit | date: 'dd/MM/yyyy'}} </span>
+          </div>
+          <div class="col-md-5 product-dtl-div">
+            <div>On Sale : </div>
+            <span>{{product.onSale}} </span>
+          </div>
+          <div class="col-md-5 product-dtl-div">
+            <div>Created by : </div>
+            <span>{{product.userName}} </span>
+          </div>
+          <div class="col-md-5 product-dtl-div">
+            <div>Seller : </div>
+            <span>{{product.sellerName}} </span>
+          </div>
+         
+        </div>
+
+        <div class="product-dtl-div">
+          <div>Rating : </div>
+          <span> <i *ngFor="let number of [0,1,2,3,4]" class="fa fa-star mr-2"></i></span> 
+        </div>
+
+        
+        <div class="product-dtl-div">
+          <div style='margin-top: 10px;'>Size : </div>
+          <mat-radio-group>
+            <mat-radio-button *ngFor="let size of product.productSizes" value="{{size.availableSizeId}}">
+                    {{size.sizeName}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+
+        <div class="quantity">
+            <p>Quantity</p>
+            <div><input class="qunt-txt" type="number" value="1"></div>
+        </div>
+        <a href="#" class="site-btn">SHOP NOW</a>
+        <hr>
+          
+        <!--Information Area-->
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Information
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            {{product.description}}
+          </mat-expansion-panel>
+
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                                (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Shipping & Returns
+              </mat-panel-title>
+              
+            </mat-expansion-panel-header>
+            <p>2 Days Returns
+                  Cash on Delivery Available
+                  Home Delivery 1 - 2 DAYS
+          </p>
+          </mat-expansion-panel>
+        </mat-accordion>
+          
+        <div class="social-sharing">
+            <a href=""><i class="fa fa-instagram"></i></a>
+            <a href=""><i class="fa fa-facebook"></i></a>
+            <a href=""><i class="fa fa-twitter"></i></a>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- product section end -->

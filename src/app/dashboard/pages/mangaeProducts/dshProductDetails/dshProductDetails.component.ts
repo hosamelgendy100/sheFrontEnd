@@ -1,8 +1,11 @@
+import { MessageService } from './../../../../sharedServices/message.service';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/dashboard/models/Product';
 import { BsModalService } from 'ngx-bootstrap';
 import { CrudService } from 'src/app/dashboard/services/crud.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dshProductDetails',
@@ -11,35 +14,27 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 export class DshProductDetailsComponent implements OnInit {
-  editmodel: Product;
+  imagesApi = environment.imageApi;
   apiController = 'products/';
-  
-  constructor(private modalService: BsModalService, private crudService: CrudService,
+  product: Product;
+  panelOpenState = false;
+
+
+  constructor(private crudService: CrudService, public aroute: ActivatedRoute,
               private toast: ToastrService) {}
 
   ngOnInit() {
+    this.aroute.data.subscribe(data => {this.product = data['product']});
   }
 
-  getProduct() {
-
+  getProduct(id) {
+    this.crudService.getById(this.apiController, id).subscribe((response) => {
+      this.product = response;
+      console.log(this.product);
+    }, error => { console.log(error.message)});
   }
 
 
-  edit(model) {
-    this.editmodel = model ;
-  }
-
-  update(categoryId?) {
-    if (this.editmodel) {
-      if (this.editmodel.name === '' || this.editmodel.name === null) {
-        return false; } else {
-          if (categoryId) { this.editmodel.categoryId = categoryId; }
-          this.crudService.update(this.editmodel.id, this.editmodel, this.apiController).subscribe();
-          console.log(this.editmodel);
-      }
-      this.getProduct();
-    }
-    this.editmodel = undefined;
-  }
+  
 
 }

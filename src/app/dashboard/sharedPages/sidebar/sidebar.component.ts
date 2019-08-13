@@ -14,6 +14,9 @@ export const ROUTES: RouteInfo[] = [
     { path: '/users',         title: 'Users List',        icon: 'fa-users',     class: '' },
     { path: '/categories',    title: 'Categories',    icon: 'fa-bars',      class: '' },
     { path: '/subCategories', title: 'SubCategories', icon: 'fa-list',      class: '' },
+    { path: '/sellers', title: 'Sellers', icon: 'fa-address-card',      class: '' },
+    { path: '/colors', title: 'Colors', icon: 'fa-adjust',      class: '' },
+    { path: '/sizes', title: 'Sizes', icon: 'fa-expand',      class: '' },
 ];
 
 @Component({

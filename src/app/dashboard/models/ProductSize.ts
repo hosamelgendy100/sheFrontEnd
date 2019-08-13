@@ -1,4 +1,6 @@
 export interface ProductSize {
+    productId?:number;
     availableSizeId?: number;
-    productId?: number;
+    productSizeCount?: number;
+    sizeName?: string;
 }

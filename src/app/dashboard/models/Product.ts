@@ -1,4 +1,4 @@
-import { ProductColor } from './ProductColor';
+import { ProductPhoto } from './ProductPhoto';
 import { Photo } from './Photo';
 import { ProductSize } from './ProductSize';
 
@@ -7,13 +7,13 @@ export interface Product {
     name: string;
     description: string;
     price?: number;
+    color: string;
     count?: number;
     creationDate: string;
     lastEdit: string;
     onSale: boolean;
-    productPhotos?: Photo[];
     productSizes?: ProductSize[];
-    productColors?: ProductColor [];
+    productPhotos?: ProductPhoto [];
     categoryId?: number;
     categoryName: string;
     subCategoryId?: number;

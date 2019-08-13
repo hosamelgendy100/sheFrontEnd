@@ -1,17 +1,18 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProductAvailableColor } from './../../../models/productAvailableColor';
 import { ProductAvailableSize } from './../../../models/productAvailableSize';
-import { ProductColor } from './../../../models/ProductColor';
 import { ProductSize } from './../../../models/ProductSize';
 import { Seller } from './../../../models/Seller';
 import { Subcategory } from './../../../models/Subcategory';
 import { Category } from './../../../models/Category';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CrudService } from 'src/app/dashboard/services/crud.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from 'src/app/dashboard/models/Product';
 import { pipe, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { emit } from 'cluster';
 
 @Component({
   selector: 'app-addProduct',
@@ -27,32 +28,58 @@ export class AddProductComponent implements OnInit {
   productArr: Array<any> = [];
   product: Product;
   returnedModel: any;
-  newCategoryId: number;
+  newCategoryId: any;
   checkBoxsValidation: boolean = true;
+  productCount: number;
+  productId: any;
 
-  constructor(public crudService: CrudService, public toast: ToastrService, public fb: FormBuilder) {}
+  constructor(public crudService: CrudService, public toast: ToastrService, public fb: FormBuilder,
+               private router: Router, private aroute: ActivatedRoute) 
+  {
+    
+  }
 
-  createProductForm() {
+  public createEmptyProductForm() {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required],
-      count: ['', Validators.required],
       onSale: ['False'],
+      color: ['', Validators.required],
       categoryId: ['', Validators.required],
       subCategoryId: ['', Validators.required],
       sellerId: ['', Validators.required]
     });
   }
 
-  getErrorMessage(input) { return  `Please enter a valid ${input}`; }
-
-  ngOnInit() {
-    this.getAllDds();
-    this.createProductForm();
+  
+  public createEditProductForm(product: Product) {
+    this.productForm = this.fb.group({
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      onSale: product.onSale,
+      color: product.color,
+      categoryId: product.categoryId,
+      subCategoryId: product.subCategoryId,
+      sellerId: product.sellerId
+    });
   }
 
-  getAllDds() {
+  public getErrorMessage(input) { return  `Please enter a valid ${input}`; }
+
+  ngOnInit() {
+    this.productId = this.aroute.snapshot.params['id'];
+    this.getAllDds();
+    if(this.productId) {
+       this.aroute.data.subscribe(data => {this.product = data['product']});
+       this.createEditProductForm(this.product);
+       console.log(this.product);
+    }
+    else this.createEmptyProductForm();
+  }
+
+  public getAllDds() {
     this.crudService.getAll('categories/').subscribe( result => this.ctgsListDd = result);
     this.crudService.getAll('sellers/').subscribe(result => this.sellersListDd = result);
     this.crudService.getAll('AvailableColors/').subscribe(result => this.ProductColorstDd = result);
@@ -61,12 +88,14 @@ export class AddProductComponent implements OnInit {
 
 
   // add product to products table
-  addModel() {
+  public addModel() {
     if(this.selectedSizes.length === 0) { this.checkBoxsValidation = false; return false;}
+    this.selectedSizes;
 
     if (!this.productForm.valid) { this.toast.error( 'All fields are required'); }
     else{
       this.product = Object.assign( {}, this.productForm.value);
+      this.product.count = this.productCount;
       this.crudService.add(this.product, 'Products').subscribe((res: Response)=> {
         this.returnedModel = Object.assign( {}, res);
         this.newCategoryId = this.returnedModel.id;
@@ -76,30 +105,20 @@ export class AddProductComponent implements OnInit {
       error => { this.toast.error( 'product hasn\'t been added'); },
        () => {
         this.addProductSizes();
-        this.addProductColors();
+        this.router.navigate(["addProductPhotos/"] , {queryParams:{ newCategoryId: this.newCategoryId}});
       });
     }
   }
    
 
   private addProductSizes() {
-    this.productArr = [];
+    this.productArr = []; 
     this.selectedSizes.forEach(size => {
-      const sizeModel: ProductSize = { availableSizeId: size, productId: this.newCategoryId };
+      const sizeModel: ProductSize = { availableSizeId: size.id,
+                          productSizeCount: size.productSizeCount, productId: this.newCategoryId };
       this.productArr.push(sizeModel);
     });
     this.crudService.add(this.productArr, 'ProductSizes').subscribe();
-  }
-
-
-  private addProductColors() {
-    this.productArr = [];
-
-    this.selectedColors.forEach(color => {
-      const colorModel: ProductColor = { availableColorId: color, productId: this.newCategoryId };
-      this.productArr.push(colorModel);
-    });
-    this.crudService.add(this.productArr, 'ProductColors').subscribe();
   }
 
 
@@ -108,22 +127,21 @@ export class AddProductComponent implements OnInit {
     this.crudService.getById(api, id).subscribe(result => this.subCtgsListDd = result);
   }
 
+  
   get selectedSizes() { 
-    return this.ProductSizesDd.filter(size => size.checked).map(opt => opt.id);
-  }
-
-  get selectedColors() { 
-    return this.ProductColorstDd.filter(color => color.checked).map(opt => opt.id)
+    this.productCount = 0;
+    let selected = this.ProductSizesDd.filter(size => size.checked);
+    selected.forEach(element => {
+      if(element.productSizeCount == null) { 
+        element.productSizeCount = 1;
+        this.productCount++;
+      }else{
+        this.productCount += element.productSizeCount;
+      }
+    });
+    return selected;
   }
 
   
 
 }
-
-
-
-// () => {
-//   console.log('product size added')
-//  }, error => { this.toast.error(error.message + '\n' + 'Product sizes hasn\'t been added') }
-// console.log('product color: ' + this.newCategoryId);
- 

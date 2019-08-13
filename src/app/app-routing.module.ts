@@ -1,3 +1,7 @@
+import { SizesComponent } from './dashboard/pages/sizes/sizes.component';
+import { ColorsComponent } from './dashboard/pages/colors/colors.component';
+import { SellersComponent } from './dashboard/pages/sellers/sellers.component';
+import { ProductDetailsResolver } from './dashboard/_resolvers/ProductDetails.resolver';
 import { AddProductPhotosComponent } from './dashboard/pages/mangaeProducts/addProductPhotos/addProductPhotos.component';
 import { DshProductDetailsComponent } from './dashboard/pages/mangaeProducts/dshProductDetails/dshProductDetails.component';
 import { AddProductComponent } from './dashboard/pages/mangaeProducts/addProduct/addProduct.component';
@@ -32,7 +36,7 @@ export const PUBLIC_ROUTES: Routes = [
   {path: 'checkOut', component: CheckOutComponent},
   {path: 'viewProducts', component: ViewProductsComponent},
   {path: 'contact', component: ContactUsComponent},
-  {path: 'viewProduct', component: ProductDetailsComponent},
+  {path: 'viewProduct/:id', component: ProductDetailsComponent, resolve: {product: ProductDetailsResolver}},
   {path: 'forgotPassword', component: ForgotPasswordComponent},
 ];
 
@@ -45,8 +49,12 @@ export const SECURE_ROUTES: Routes = [
   {path: 'categories', component: CategoriesComponent},
   {path: 'subCategories', component: SubcategoriesComponent},
   {path: 'addProduct', component: AddProductComponent},
-  {path: 'dshProductDetails/:id', component: DshProductDetailsComponent},
+  {path: 'addProduct/:id', component: AddProductComponent, resolve: {product: ProductDetailsResolver}},
+  {path: 'dshProductDetails/:id', component: DshProductDetailsComponent, resolve:{product: ProductDetailsResolver}},
   {path: 'addProductPhotos', component: AddProductPhotosComponent},
+  {path: 'sellers', component: SellersComponent},
+  {path: 'colors', component: ColorsComponent},
+  {path: 'sizes', component: SizesComponent},
 ];
 
 const routes: Routes = [
@@ -54,7 +62,6 @@ const routes: Routes = [
   { path: '', component: HomeLayoutComponent, data: { title: 'Public Views' }, children: PUBLIC_ROUTES },
   { path: '', component: DashboardLayoutComponent,  data: { title: 'Secure Views' }, children: SECURE_ROUTES,
    runGuardsAndResolvers: 'always' }
-
 ];
 
 

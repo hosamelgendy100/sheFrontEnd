@@ -1,6 +1,6 @@
 export interface Subcategory {
     id?: number;
-    name: string;
+    name?: string;
     categoryId?: number;
-    categoryName: string;
+    categoryName?: string;
 }

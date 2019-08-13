@@ -1,0 +1,97 @@
+<div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-primary" (click)="openModal(template)">
+        <i class="fa fa-plus-circle mr-2"></i>Add Seller
+      </button>
+      <br>
+
+      <div class="card" style="min-width:600px; display: inline-block;">
+        <div class="card-header">
+          <h4 class="card-title">Sellers</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover table-sm">
+              <thead class="text-primary">
+                <th *ngFor="let header of tableRows">{{header}}</th>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let model of modelsList;let index=index">
+                  <td> {{index+1}} </td>
+                  <td> <span>{{model.name}} {{model.lastName}}</span> </td>
+                  <td> <span>{{model.phoneNumber}}</span> </td>
+                  <td> <span>{{model.email}}</span> </td>
+                  <td> <span>{{model.companyName}}</span> </td>
+                  <td> <span>{{model.webSiteUrl}}</span> </td>
+                  <td> <span>{{model.countryOfOrigin}}</span> </td>
+
+                  <input type="hidden" [value]="model.id">
+
+                  <td (click)='edit(template, model)' class="text-warning"><i class="fa fa-pencil"></i></td>
+                  <td (click)='delete(model.id)' class="text-danger"><i class="fa fa-trash-o"></i></td>
+                </tr>
+              </tbody>
+
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  
+
+
+<!-- Create New Category -->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Create Seller</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="sellerForm" class='seller-form'>
+        <input formControlName="name" class="form-control"  [ngClass]="{'is-invalid': sellerForm.get('name').errors 
+        && sellerForm.get('name').touched}"
+        placeholder="Enter first name" id='seller-name' required tabindex="1">
+        <div class='invalid-feedback'> {{getErrorMessage('Seller name')}} </div>
+
+        <input formControlName="lastName" class="form-control" [ngClass]="{'is-invalid': sellerForm.get('lastName').errors 
+        && sellerForm.get('lastName').touched}"
+        placeholder="Enter last Name" required tabindex="2">
+        <div class='invalid-feedback'> {{getErrorMessage('Last Name')}} </div>
+
+        <input formControlName="phoneNumber" class="form-control" [ngClass]="{'is-invalid': sellerForm.get('phoneNumber').errors 
+        && sellerForm.get('phoneNumber').touched}"
+        placeholder="Enter phone Number" required tabindex="3">
+        <div class='invalid-feedback'> {{getErrorMessage('Phone Number')}} </div>
+
+        <input formControlName="email" class="form-control" [ngClass]="{'is-invalid': sellerForm.get('email').errors 
+        && sellerForm.get('email').touched}"
+        placeholder="Enter email" required tabindex="4">
+        <div class='invalid-feedback' *ngIf="sellerForm.get('email').hasError('email')">
+             {{getErrorMessage('Email')}} </div>
+
+        <input formControlName="countryOfOrigin" class="form-control" [ngClass]="{'is-invalid': sellerForm.get('countryOfOrigin').errors 
+        && sellerForm.get('countryOfOrigin').touched}" 
+        placeholder="Enter country Of Origin" required tabindex="5">
+        <div class='invalid-feedback'> {{getErrorMessage('country Of Origin')}} </div>
+
+        <input formControlName="webSiteUrl" class="form-control" [ngClass]="{'is-invalid': sellerForm.get('webSiteUrl').errors 
+        && sellerForm.get('webSiteUrl').touched}"
+        placeholder="Enter webSite" required tabindex="6">
+        <div class='invalid-feedback'> {{getErrorMessage('WebSite Url')}} </div>
+
+        <input formControlName="companyName" class="form-control" [ngClass]="{'is-invalid': sellerForm.get('companyName').errors 
+        && sellerForm.get('companyName').touched}"
+        placeholder="Enter company Name" required tabindex="7">
+        <div class='invalid-feedback'> {{getErrorMessage('Company Name')}} </div>
+
+
+        <input *ngIf="!editMode" (click)="addModel()" type="button" value="Add Seller" class="btn btn-sm btn-outline-primary " tabindex="8">
+        <input *ngIf="editMode"  (click)="update()" type="button" value="Update Seller" class="btn btn-sm btn-outline-primary " tabindex="8">
+
+    </form>
+  </div>
+</ng-template>

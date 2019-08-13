@@ -36,7 +36,6 @@ import { CreateAccountComponent } from './ClientDisplay/AuthPages/create-account
 import { DashboardHomeComponent } from './dashboard/pages/dashboard-home/dashboard-home.component';
 import { DashboardLayoutComponent } from './dashboard/sharedPages/dashboard-layout/dashboard-layout.component';
 import { SidebarComponent } from './dashboard/sharedPages/sidebar/sidebar.component';
-import { ProductReviewComponent } from './ClientDisplay/Products/product-review/product-review.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NotificationsComponent } from './dashboard/pages/notifications/notifications.component';
 import { SubcategoriesComponent } from './dashboard/pages/subcategories/subcategories.component';
@@ -51,6 +50,15 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { MAT_LABEL_GLOBAL_OPTIONS } from '@angular/material/core';
+import { FileUploadModule } from 'ng2-file-upload';
+import { ProductDetailsResolver } from './dashboard/_resolvers/ProductDetails.resolver';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { SellersComponent } from './dashboard/pages/sellers/sellers.component';
+import { ColorsComponent } from './dashboard/pages/colors/colors.component';
+import { SizesComponent } from './dashboard/pages/sizes/sizes.component';
+import {MatTreeModule} from '@angular/material/tree';
+import { Ng5SliderModule } from 'ng5-slider';
 
 
 
@@ -61,21 +69,23 @@ import { MAT_LABEL_GLOBAL_OPTIONS } from '@angular/material/core';
     CheckOutComponent, ViewProductsComponent, ProductDetailsComponent, ContactUsComponent,
     SignInComponent, CreateAccountComponent, DashboardHomeComponent,
     DashboardLayoutComponent, SidebarComponent, HomeLayoutComponent,
-    ProductReviewComponent, ForgotPasswordComponent, NavbarComponent, NotificationsComponent,
+    ForgotPasswordComponent, NavbarComponent, NotificationsComponent,
     CategoriesComponent, SubcategoriesComponent, DashboardProductsComponent, UsersListComponent,
-    AddProductComponent, DshProductDetailsComponent, AddProductPhotosComponent
+    AddProductComponent, DshProductDetailsComponent, AddProductPhotosComponent, SellersComponent, ColorsComponent, SizesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CollapseModule.forRoot(), BsDropdownModule.forRoot(),
     FormsModule, HttpClientModule, ReactiveFormsModule,
-    BrowserAnimationsModule, ToastrModule.forRoot(), CarouselModule.forRoot(), NgbModule,
-    ModalModule.forRoot(), MatFormFieldModule, MatRadioModule, MatCheckboxModule, MatSelectModule,
-    MatIconModule, MatInputModule, MatButtonModule, MatCardModule
+    BrowserAnimationsModule, ToastrModule.forRoot({timeOut: 10000, positionClass: 'toast-bottom-left',
+     preventDuplicates: true}), 
+    CarouselModule.forRoot(), NgbModule, ModalModule.forRoot(), MatFormFieldModule, MatRadioModule,
+    MatCheckboxModule, MatSelectModule, MatIconModule, MatInputModule, MatButtonModule, MatCardModule,
+    FileUploadModule, AccordionModule.forRoot(),MatExpansionModule, Ng5SliderModule
   ],
   providers: [AlertifyService, CrudService, ErrorInterceptor,
-              HttpErrorHandler, MessageService,
+              HttpErrorHandler, MessageService,ProductDetailsResolver,
               {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'false'}}
             ],
   bootstrap: [AppComponent]

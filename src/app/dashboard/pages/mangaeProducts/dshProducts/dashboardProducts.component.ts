@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 export class DashboardProductsComponent implements OnInit {
-  public tableTitles = ['No.', 'Name', 'Count', 'Main Photo', 'Price', 'On Sale', 'Category', 'Subcategory', 'Seller Name'];
+  public tableTitles = ['No.', 'Name', 'Count', 'Main Photo', 'Price', 'On Sale', 'Category', 'Subcategory', 'Seller Name', 'Edit', 'Delete'];
   productsList: Product[];  // actual model container
   apiController = 'products/';
 
@@ -31,5 +31,6 @@ export class DashboardProductsComponent implements OnInit {
         this.getall();
     }
   }
+
 
 }

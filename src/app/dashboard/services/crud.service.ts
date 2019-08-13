@@ -2,7 +2,7 @@ import { HandleError, HttpErrorHandler } from '../../sharedServices/http-error-h
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 
@@ -47,9 +47,12 @@ export class CrudService {
   }
 
 
-  delete(id: number, apiController: string): Observable<{}> {
+  public delete(id: number, apiController: string): Observable<{}> {
     return this.http.delete(this.API + apiController + id, httpOptions)
             .pipe(catchError(this.handleError('delete')));
   }
 
+
+
+ 
 }

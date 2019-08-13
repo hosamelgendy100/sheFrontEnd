@@ -26,9 +26,8 @@
                   <td class="text-left"> <span>{{product.categoryName}}</span> </td>
                   <td class="text-left"> <span>{{product.subCategoryName}}</span> </td>
                   <td class="text-left"> <span>{{product.sellerName}}</span> </td>
-                  <td (click)='delete(product.id)' class="text-primary">
-                    <i class="fa fa-trash-o"></i>
-                  </td>
+                  <td class="text-primary"><a [routerLink]="['/addProduct/', product.id]"><i class="fa fa-pencil"></i></a></td>
+                  <td (click)='delete(product.id)' class="text-primary"><i class="fa fa-trash-o"></i></td>
                 </tr>
               </tbody>
   
